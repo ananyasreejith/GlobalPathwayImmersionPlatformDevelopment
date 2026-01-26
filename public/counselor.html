@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counselor Dashboard - Global Pathway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Global Pathway <span
+                        style="font-size: 0.8em; color: var(--text-light); font-weight: normal;">Counselor Portal</span>
+                </div>
+                <div>
+                    <span id="user-name" style="margin-right: 15px; font-weight: 600;"></span>
+                    <button id="logout-btn" class="btn" style="border: 1px solid #ddd;">Logout</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="card" style="margin-top: 30px;">
+            <h3>Student Overview</h3>
+            <p style="margin-bottom: 20px;">Monitor student applications and mental health status.</p>
+
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="text-align: left; background: #f8f9fa;">
+                        <th style="padding: 15px;">Student Name</th>
+                        <th style="padding: 15px;">Latest Mood</th>
+                        <th style="padding: 15px;">Last Check-in</th>
+                        <th style="padding: 15px;">Application Count</th>
+                        <th style="padding: 15px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="students-table-body">
+                    <!-- Populated JS -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Global Pathway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Global Pathway</div>
+                <div>
+                    <span id="user-name" style="margin-right: 15px; font-weight: 600;"></span>
+                    <button id="logout-btn" class="btn" style="border: 1px solid #ddd;">Logout</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-grid">
+            <!-- Emotion Tracker -->
+            <div class="card">
+                <h3>Weekly Emotion Check-in</h3>
+                <p style="color: var(--text-light); margin-bottom: 20px;">How are you feeling right now regarding your
+                    application process?</p>
+
+                <div class="emotion-grid">
+                    <button class="emotion-btn" data-value="Happy" title="Happy">😊</button>
+                    <button class="emotion-btn" data-value="Confident" title="Confident">😎</button>
+                    <button class="emotion-btn" data-value="Confused" title="Confused">🤔</button>
+                    <button class="emotion-btn" data-value="Anxious" title="Anxious">😰</button>
+                    <button class="emotion-btn" data-value="Stressed" title="Stressed">😫</button>
+                </div>
+
+                <div class="form-group">
+                    <label>Short Note (Optional)</label>
+                    <textarea id="emotion-note" rows="3"
+                        placeholder="Tell us more about how things are going..."></textarea>
+                </div>
+
+                <div id="log-msg" style="margin-bottom: 15px;"></div>
+                <button id="submit-emotion" class="btn btn-primary">Log Mood</button>
+            </div>
+
+            <!-- Application Status -->
+            <div class="card">
+                <h3>Application Status</h3>
+                <div id="applications-list" style="margin-top: 20px;">
+                    <!-- Populated by JS -->
+                    <p>Loading application data...</p>
+                </div>
+            </div>
+
+            <!-- History -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3>Your Mood History</h3>
+                <div style="margin-top: 15px; overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="text-align: left; border-bottom: 2px solid #eee;">
+                                <th style="padding: 10px;">Date</th>
+                                <th style="padding: 10px;">Mood</th>
+                                <th style="padding: 10px;">Note</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

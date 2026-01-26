@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Global Pathway</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="glass-container full-width">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div class="logo" style="margin:0;">Student Dashboard</div>
+            <button onclick="logout()" class="btn-secondary" style="width: auto; padding: 8px 15px;">Logout</button>
+        </div>
+
+        <!-- 1. Selection Phase -->
+        <div id="selection-phase">
+            <h2>What would you like to do?</h2>
+            <div class="dashboard-options">
+                <div class="option-card" onclick="showForm('Study')">
+                    <h3>Study Abroad</h3>
+                    <p>Apply for higher education in top universities.</p>
+                </div>
+                <div class="option-card" onclick="showForm('Work')">
+                    <h3>Work Abroad</h3>
+                    <p>Explore career opportunities globally.</p>
+                </div>
+            </div>
+
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
+
+            <h3>Track Application</h3>
+            <div style="max-width: 400px; margin: 0 auto; display: flex; gap: 10px;">
+                <input type="text" id="trackAppId" placeholder="Enter Application ID">
+                <button onclick="trackApplication()" class="btn-primary" style="width: auto; margin: 0;">Track</button>
+            </div>
+            <div id="trackResult" style="margin-top: 15px;"></div>
+
+            <div style="margin-top: 30px;">
+                <h3>My Applications</h3>
+                <div id="my-applications-list" style="text-align: left; max-height: 200px; overflow-y: auto;">
+                    <!-- List populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Application Form -->
+        <div id="application-form-container" class="hidden">
+            <button onclick="showSelection()" class="btn-secondary" style="width: auto; margin-bottom: 20px;">&larr;
+                Back</button>
+            <h2 id="form-title">Application</h2>
+            <form id="appForm">
+                <input type="hidden" id="appType">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label>Contact Number</label>
+                    <input type="text" id="contactNumber" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="appEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Country Interested</label>
+                    <input type="text" id="country" required>
+                </div>
+                <div class="form-group">
+                    <label id="courseOrJobLabel">Course Interested</label>
+                    <input type="text" id="courseOrJob" required>
+                </div>
+                <button type="submit" class="btn-primary">Submit Application</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Check Auth using token existence as simple check
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'index.html';
+        } else {
+            loadMyApplications();
+            // Pre-fill email if possible from token? Token only has ID/Role usually. 
+            // We could fetch user details, but for now manual entry or "My Applications" is enough.
+        }
+
+        function showForm(type) {
+            document.getElementById('selection-phase').classList.add('hidden');
+            document.getElementById('application-form-container').classList.remove('hidden');
+            document.getElementById('form-title').innerText = type + ' Abroad Application';
+            document.getElementById('appType').value = type;
+
+            if (type === 'Study') {
+                document.getElementById('courseOrJobLabel').innerText = 'Course Interested';
+            } else {
+                document.getElementById('courseOrJobLabel').innerText = 'Job Title / Position Interested';
+            }
+        }
+
+        function showSelection() {
+            document.getElementById('selection-phase').classList.remove('hidden');
+            document.getElementById('application-form-container').classList.add('hidden');
+        }
+    </script>
+</body>
+
+</html>

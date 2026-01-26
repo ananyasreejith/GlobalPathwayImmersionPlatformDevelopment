@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Global Pathway</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        select.status-select {
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="glass-container full-width">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div class="logo" style="margin:0;">Admin Dashboard</div>
+            <div>
+                <button onclick="window.location.href='index.html'" class="btn-secondary"
+                    style="width: auto; padding: 8px 15px;">Login Page</button>
+                <button onclick="logout()" class="btn-secondary" style="width: auto; padding: 8px 15px;">Logout</button>
+            </div>
+        </div>
+
+        <h3>All Student Applications</h3>
+        <div style="overflow-x: auto;">
+            <table id="applicationsTable">
+                <thead>
+                    <tr>
+                        <th>App ID</th>
+                        <th>Student</th>
+                        <th>Type</th>
+                        <th>Country</th>
+                        <th>Course/Job</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'index.html';
+        } else {
+            loadAllApplications();
+        }
+    </script>
+</body>
+
+</html>
