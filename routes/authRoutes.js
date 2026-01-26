@@ -13,8 +13,9 @@ const JWT_SECRET = process.env.JWT_SECRET || 'secret_key_123';
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp.ethereal.email',
     port: process.env.EMAIL_PORT || 587,
+    secure: Number(process.env.EMAIL_PORT) === 465, // true for 465, false for other ports
     auth: {
-        user: process.env.EMAIL_USER || 'ethereal_user', // Replace with real or generated creds
+        user: process.env.EMAIL_USER || 'ethereal_user',
         pass: process.env.EMAIL_PASS || 'ethereal_pass'
     }
 });
@@ -71,6 +72,8 @@ router.post('/register', async (req, res) => {
         transporter.sendMail(mailOptions)
             .then(() => console.log(`Verification email sent to ${email}`))
             .catch(err => console.error('Error sending email:', err.message));
+
+        res.status(201).json({ message: 'User registered. Please check your email to verify your account.' });
 
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
