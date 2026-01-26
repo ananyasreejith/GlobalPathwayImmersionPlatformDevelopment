@@ -67,15 +67,11 @@ router.post('/register', async (req, res) => {
                    <a href="${verificationUrl}">${verificationUrl}</a>`
         };
 
-        try {
-            await transporter.sendMail(mailOptions);
-            console.log(`Verification email sent to ${email}`);
-        } catch (emailError) {
-            console.error('Error sending email (likely due to missing credentials):', emailError.message);
-            console.log('Use the link logged above to verify.');
-        }
+        // Send Verification Email (Non-blocking)
+        transporter.sendMail(mailOptions)
+            .then(() => console.log(`Verification email sent to ${email}`))
+            .catch(err => console.error('Error sending email:', err.message));
 
-        res.status(201).json({ message: 'User registered. Please check your email to verify your account.' });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
