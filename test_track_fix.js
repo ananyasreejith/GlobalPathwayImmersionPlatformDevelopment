@@ -1,7 +1,7 @@
 
 // Using native fetch in Node.js 18+
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'http://localhost:3000/api';
 
 async function testTracking() {
     console.log('--- Testing Tracking Fix ---');

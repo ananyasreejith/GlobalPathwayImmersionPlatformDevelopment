@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api'; // Updated base URL to include /api on port 5000
+const API_URL = '/api'; // Updated base URL to relative path
 
 /* --- Auth --- */
 
@@ -11,13 +11,14 @@ if (registerForm) {
         const email = document.getElementById('regEmail').value;
         const password = document.getElementById('regPassword').value;
         const role = document.getElementById('regRole').value;
+        const adminSecret = document.getElementById('regAdminCode').value;
 
         try {
             console.log('Sending registration request to:', `${API_URL}/register`);
             const res = await fetch(`${API_URL}/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password, role })
+                body: JSON.stringify({ username, email, password, role, adminSecret })
             });
             const data = await res.json();
             if (res.ok) {
@@ -88,7 +89,9 @@ if (appForm) {
         const countryInterested = document.getElementById('country').value;
 
         // Field name depends on Study vs Work
-        const courseOrJob = document.getElementById('courseOrJob').value;
+        const courseOrJob = type === 'Study'
+            ? document.getElementById('courseSelect').value
+            : document.getElementById('jobInput').value;
 
         const user = JSON.parse(localStorage.getItem('user')) || {};
 

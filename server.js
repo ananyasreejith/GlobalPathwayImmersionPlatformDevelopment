@@ -19,9 +19,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 const startServer = async () => {
     try {
         // Connect to MongoDB Atlas (with Fallback)
-        if (!process.env.MONGODB_URI) {
-            throw new Error('MONGODB_URI is not defined in .env');
-        }
+        // if (!process.env.MONGODB_URI) {
+        //     throw new Error('MONGODB_URI is not defined in .env');
+        // }
 
         try {
             console.log('Attempting to connect to MongoDB Atlas...');
