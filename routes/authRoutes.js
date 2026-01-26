@@ -17,7 +17,9 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL_USER || 'ethereal_user',
         pass: process.env.EMAIL_PASS || 'ethereal_pass'
-    }
+    },
+    logger: true, // Log to console
+    debug: true   // Include SMTP traffic in logs
 });
 
 
@@ -49,19 +51,22 @@ router.post('/register', async (req, res) => {
             password: hashedPassword,
             role: role || 'student',
             verificationToken,
-            isVerified: false
+            isVerified: true // [TEMPORARY] Auto-verify users as per request
         });
 
         await user.save();
 
-        // Send Verification Email
+        // Send Verification Email (Skipped for now)
+        /*
         const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
         const verificationUrl = `${baseUrl}/api/verify-email?token=${verificationToken}`;
 
-        console.log(`[DEV] Verification Link: ${verificationUrl}`); // Log always for dev
+        console.log(`[DEV] Verification Link: ${verificationUrl}`);
+        console.log(`[EMAIL DEBUG] Attempting to send email to: ${email}`);
+        console.log(`[EMAIL DEBUG] Config: Host=${process.env.EMAIL_HOST}, Port=${process.env.EMAIL_PORT}, User=${process.env.EMAIL_USER}, Secure=${Number(process.env.EMAIL_PORT) === 465}`);
 
         const mailOptions = {
-            from: '"Global Pathway Platform" <no-reply@globalpathway.com>',
+            from: process.env.EMAIL_FROM || '"Global Pathway Platform" <no-reply@globalpathway.com>',
             to: email,
             subject: 'Verify Your Email',
             html: `<p>Please verify your email by clicking the link below:</p>
@@ -70,10 +75,17 @@ router.post('/register', async (req, res) => {
 
         // Send Verification Email (Non-blocking)
         transporter.sendMail(mailOptions)
-            .then(() => console.log(`Verification email sent to ${email}`))
-            .catch(err => console.error('Error sending email:', err.message));
+            .then((info) => {
+                console.log(`Verification email sent to ${email}`);
+                console.log(`[EMAIL DEBUG] MessageID: ${info.messageId}`);
+            })
+            .catch(err => {
+                console.error('Error sending email:', err.message);
+                console.error('[EMAIL DEBUG] Full Error:', err);
+            });
+        */
 
-        res.status(201).json({ message: 'User registered. Please check your email to verify your account.' });
+        res.status(201).json({ message: 'User registered successfully. You can now login.' });
 
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
