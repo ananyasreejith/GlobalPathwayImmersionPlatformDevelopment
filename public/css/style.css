@@ -322,3 +322,44 @@ button:hover {
         /* Simple mobile hide for now */
     }
 }
+
+/* Dashboard Options (Cards) */
+.dashboard-options {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.option-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+    flex: 1;
+    min-width: 280px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.option-card h3 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option-card p {
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 1.6;
+}
