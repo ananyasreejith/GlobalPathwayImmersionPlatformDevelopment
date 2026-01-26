@@ -49,5 +49,5 @@ A comprehensive web platform designed to connect students with international edu
     npm run dev
     ```
 
-## 📄 License
+##  License
 This project is open-source and available under the MIT License.
