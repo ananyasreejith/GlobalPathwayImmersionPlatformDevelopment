@@ -10,10 +10,13 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use((req, res, next) => {
-    console.log(`[REQUEST] ${req.method} ${req.url}`);
-    next();
+console.log(`[REQUEST] ${req.method} ${req.url}`);
+next();
 });
+
+// Health Check for Render
+app.get('/health', (req, res) => res.status(200).send('OK'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 const startServer = async () => {
