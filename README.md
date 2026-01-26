@@ -2,23 +2,23 @@
 
 A comprehensive web platform designed to connect students with international educational and career opportunities. This application helps users explore study abroad programs, track applications, and receive guidance from counselors.
 
-## 🚀 Live Demo
+## Live Demo
 **[Launch Application](https://globalpathwayimmersionplatformdevelopmen.onrender.com)**
 
-## ✨ Features
+##  Features
 - **Student Dashboard**: Explore study and work opportunities abroad.
 - **Application Tracking**: Real-time status updates for submitted applications.
 - **Secure Authentication**: User registration and login with email verification (JWT).
 - **Responsive Design**: Mobile-friendly interface for students on the go.
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Frontend**: HTML5, CSS3 (Glassmorphism UI), Vanilla JavaScript
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB Atlas
 - **Authentication**: JWT, bcryptjs
 - **Services**: Nodemailer (Email), Render (Hosting)
 
-## 📦 Local Setup
+##  Local Setup
 
 1.  **Clone the repository:**
     ```bash
