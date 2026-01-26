@@ -6,148 +6,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard - Global Pathway</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
-    <div class="glass-panel" style="max-width: 1000px; width: 90%; margin: 50px auto; padding: 40px; min-height: 80vh;">
-
-        <!-- Header -->
-        <div
-            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 20px;">
-            <div class="logo" style="font-size: 24px;">
-                <i class="fas fa-globe-americas" style="color: var(--primary-color);"></i>
-                Global Pathway
-            </div>
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <span style="font-size: 14px; color: var(--text-medium);">Welcome, Student</span>
-                <button onclick="logout()" class="btn-secondary"
-                    style="background: rgba(255,255,255,0.5); color: var(--text-dark); width: auto; padding: 8px 20px; border-radius: 20px; font-size: 14px;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
-            </div>
+    <div class="glass-container full-width">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div class="logo" style="margin:0;">Student Dashboard</div>
+            <button onclick="logout()" class="btn-secondary" style="width: auto; padding: 8px 15px;">Logout</button>
         </div>
 
         <!-- 1. Selection Phase -->
         <div id="selection-phase">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 style="font-size: 32px; font-weight: 300; margin-bottom: 10px;">Your Journey Starts Here</h2>
-                <p style="color: var(--text-medium);">Choose your path to global opportunities</p>
-            </div>
-
-            <div class="dashboard-grid">
-                <!-- Feature Card: Study Abroad -->
-                <div class="feature-card" onclick="showForm('Study')">
-                    <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h2>What would you like to do?</h2>
+            <div class="dashboard-options">
+                <div class="option-card" onclick="showForm('Study')">
                     <h3>Study Abroad</h3>
-                    <p>Apply for top-tier universities worldwide. Unlock your academic potential.</p>
+                    <p>Apply for higher education in top universities.</p>
                 </div>
-
-                <!-- Feature Card: Work Abroad -->
-                <div class="feature-card" onclick="showForm('Work')">
-                    <div class="feature-icon"><i class="fas fa-briefcase"></i></div>
+                <div class="option-card" onclick="showForm('Work')">
                     <h3>Work Abroad</h3>
-                    <p>Explore international career opportunities and expand your professional horizon.</p>
+                    <p>Explore career opportunities globally.</p>
                 </div>
             </div>
 
-            <div style="margin: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 40px;">
-                <h3 style="text-align: center; margin-bottom: 20px;">Track Application Status</h3>
-                <div class="input-group">
-                    <input type="text" id="trackAppId" class="modern-input"
-                        placeholder="Enter Application ID (e.g., APP-123456)">
-                    <button onclick="trackApplication()" class="input-btn">Track</button>
-                </div>
-                <div id="trackResult" style="margin-top: 20px; text-align: center; font-weight: 500;"></div>
-            </div>
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
 
-            <div style="margin-top: 50px;">
-                <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-folder-open" style="color: var(--primary-color);"></i> My Applications
-                </h3>
-                <div id="my-applications-list" class="glass-container"
-                    style="background: rgba(255,255,255,0.4); border-radius: 12px; padding: 20px; max-height: 300px; overflow-y: auto;">
+            <h3>Track Application</h3>
+            <div style="max-width: 400px; margin: 0 auto; display: flex; gap: 10px;">
+                <input type="text" id="trackAppId" placeholder="Enter Application ID">
+                <button onclick="trackApplication()" class="btn-primary" style="width: auto; margin: 0;">Track</button>
+            </div>
+            <div id="trackResult" style="margin-top: 15px;"></div>
+
+            <div style="margin-top: 30px;">
+                <h3>My Applications</h3>
+                <div id="my-applications-list" style="text-align: left; max-height: 200px; overflow-y: auto;">
                     <!-- List populated by JS -->
-                    <p style="text-align: center; color: var(--text-light); padding: 20px;">Loading applications...</p>
                 </div>
             </div>
         </div>
 
         <!-- 2. Application Form -->
         <div id="application-form-container" class="hidden">
-            <button onclick="showSelection()"
-                style="background: transparent; color: var(--text-medium); width: auto; margin-bottom: 20px; padding: 0; display: flex; align-items: center; gap: 8px;">
-                <i class="fas fa-arrow-left"></i> Back to Dashboard
-            </button>
-
-            <div class="glass-card" style="max-width: 600px; margin: 0 auto; text-align: left;">
-                <h2 id="form-title"
-                    style="margin-bottom: 20px; color: var(--primary-color); border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px;">
-                    Application</h2>
-
-                <form id="appForm">
-                    <input type="hidden" id="appType">
-
-                    <div class="form-group">
-                        <label><i class="fas fa-user" style="width: 20px; color: var(--primary-color);"></i> Full
-                            Name</label>
-                        <input type="text" id="fullName" required placeholder="John Doe">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-phone" style="width: 20px; color: var(--primary-color);"></i> Contact
-                            Number</label>
-                        <input type="text" id="contactNumber" required placeholder="+1 234 567 890">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-envelope" style="width: 20px; color: var(--primary-color);"></i>
-                            Email</label>
-                        <input type="email" id="appEmail" required placeholder="john@example.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-globe" style="width: 20px; color: var(--primary-color);"></i> Country of
-                            Interest</label>
-                        <select id="country" required>
-                            <option value="">Select Country...</option>
-                            <option value="USA">USA</option>
-                            <option value="UK">UK</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Germany">Germany</option>
-                            <option value="France">France</option>
-                            <option value="Ireland">Ireland</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label id="courseOrJobLabel"><i class="fas fa-book"
-                                style="width: 20px; color: var(--primary-color);"></i> Course Interested</label>
-
-                        <!-- Course Dropdown -->
-                        <select id="courseSelect">
-                            <option value="">Select Course...</option>
-                            <option value="Computer Science">Computer Science</option>
-                            <option value="Data Science">Data Science</option>
-                            <option value="Business Administration">Business Administration</option>
-                            <option value="Engineering">Engineering</option>
-                            <option value="Medicine">Medicine</option>
-                            <option value="Law">Law</option>
-                            <option value="Arts & Humanities">Arts & Humanities</option>
-                        </select>
-
-                        <!-- Job Input (Hidden by default) -->
-                        <input type="text" id="jobInput" class="hidden" placeholder="e.g. Software Engineer">
-                    </div>
-
-                    <button type="submit" class="hero-btn" style="width: 100%; margin-top: 20px;">
-                        Submit Application <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
-                    </button>
-                </form>
-            </div>
+            <button onclick="showSelection()" class="btn-secondary" style="width: auto; margin-bottom: 20px;">&larr;
+                Back</button>
+            <h2 id="form-title">Application</h2>
+            <form id="appForm">
+                <input type="hidden" id="appType">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label>Contact Number</label>
+                    <input type="text" id="contactNumber" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="appEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Country Interested</label>
+                    <select id="country" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="">Select Country...</option>
+                        <option value="USA">USA</option>
+                        <option value="UK">UK</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="France">France</option>
+                        <option value="Ireland">Ireland</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="courseOrJobLabel">Course Interested</label>
+                    <!-- Course Dropdown -->
+                    <select id="courseSelect"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="">Select Course...</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Business Administration">Business Administration</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Medicine">Medicine</option>
+                        <option value="Law">Law</option>
+                        <option value="Arts & Humanities">Arts & Humanities</option>
+                    </select>
+                    <!-- Job Input (Hidden by default) -->
+                    <input type="text" id="jobInput" class="hidden" placeholder="Enter Job Title">
+                </div>
+                <button type="submit" class="btn-primary">Submit Application</button>
+            </form>
         </div>
 
     </div>
@@ -159,9 +110,8 @@
             window.location.href = 'index.html';
         } else {
             loadMyApplications();
-            // Pre-fill email if possible
-            // const user = JSON.parse(localStorage.getItem('user'));
-            // if(user && user.username) document.querySelector('.welcome-text').innerText = `Welcome, ${user.username}`;
+            // Pre-fill email if possible from token? Token only has ID/Role usually. 
+            // We could fetch user details, but for now manual entry or "My Applications" is enough.
         }
 
         function showForm(type) {
@@ -171,14 +121,14 @@
             document.getElementById('appType').value = type;
 
             if (type === 'Study') {
-                document.getElementById('courseOrJobLabel').innerHTML = '<i class="fas fa-book" style="width: 20px; color: var(--primary-color);"></i> Course Interested';
+                document.getElementById('courseOrJobLabel').innerText = 'Course Interested';
                 document.getElementById('courseSelect').classList.remove('hidden');
                 document.getElementById('courseSelect').required = true;
 
                 document.getElementById('jobInput').classList.add('hidden');
                 document.getElementById('jobInput').required = false;
             } else {
-                document.getElementById('courseOrJobLabel').innerHTML = '<i class="fas fa-briefcase" style="width: 20px; color: var(--primary-color);"></i> Job Title / Position';
+                document.getElementById('courseOrJobLabel').innerText = 'Job Title / Position Interested';
                 document.getElementById('courseSelect').classList.add('hidden');
                 document.getElementById('courseSelect').required = false;
 
